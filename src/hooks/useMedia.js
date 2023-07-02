@@ -6,8 +6,9 @@ export function useMedia(query) {
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const isQuery = query;
 
-  useEffect(() => {
+  const getMedia = () => {
     fetch(`${BASE_URL}s=${query}`)
       .then(res => {
         if (!res.ok) throw new Error();
@@ -29,7 +30,12 @@ export function useMedia(query) {
         setError(true);
       })
       .finally(setIsLoading(false));
+  };
+  useEffect(() => {
+    if (query) {
+      getMedia(query);
+    }
   }, [query]);
 
-  return { data, error, isLoading };
+  return { data, error, isLoading, isQuery };
 }

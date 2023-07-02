@@ -9,7 +9,7 @@ import MediaList from "./components/MediaList";
 
 function App() {
   const [query, setQuery] = useState("");
-  const { data, error, isLoading } = useMedia(query);
+  const { data, error, isLoading, isQuery } = useMedia(query);
   const handleQuery = (text) => {
     setQuery(text);
 
@@ -18,7 +18,7 @@ function App() {
     <>
       <Search onChangeQuery={(text) => handleQuery(text)} />
 
-      <MediaList data={data} error={error} isLoading={isLoading} />
+      <MediaList data={data} error={error} isLoading={isLoading} isQuery={isQuery} />
 
     </>
   );

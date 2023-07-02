@@ -6,7 +6,8 @@ function Search({ onChangeQuery }) {
   const inputTitle = useRef();
   const handleSubmit = (e) => {
     e.preventDefault();
-    onChangeQuery(inputTitle.current.value);
+    onChangeQuery(inputTitle.current.value.trim());
+    inputTitle.current.value = "";
 
 
   };
