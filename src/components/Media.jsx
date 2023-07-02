@@ -2,9 +2,9 @@ import PropTypes from "prop-types";
 function Media({ media }) {
   return (
     <article className="media-card">
-      <h3>{media.Title}</h3>
-      <p>{media.Year}</p>
-      <img src={media.Poster} alt={media.Title} />
+      <h3>{media.title}</h3>
+      <p>{media.year}</p>
+      <img src={media.poster} alt={media.title} />
     </article>
   );
 }
@@ -12,11 +12,11 @@ function Media({ media }) {
 Media.propTypes = {
   media: PropTypes.shape(
     {
-      Title: PropTypes.string,
-      Year: PropTypes.string,
-      imdbID: PropTypes.string,
-      Type: PropTypes.string,
-      Poster: PropTypes.string
+      title: PropTypes.string,
+      year: PropTypes.string,
+      id: PropTypes.string,
+      type: PropTypes.string,
+      poster: PropTypes.string
     }
   )
 

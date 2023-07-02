@@ -9,8 +9,8 @@
 .media-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  row-gap: 2rem;
-  column-gap: 1.2rem;
+  gap: 2rem;
+
 }
 
 .media-card {
@@ -27,5 +27,6 @@
 
 .media-card img {
   border-radius: 7px;
+  width: 100%;
 
 }
