@@ -16,7 +16,7 @@ function Search({ onChangeQuery }) {
       <h1>Awesome Media Finder</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="media">Media: </label>
-        <input ref={inputTitle} type="search" name="media" id="media" placeholder='Title of a movie, tv show or game...' title='Type in a movie title and click on "search" button' required onInvalid={(e) => e.target.setCustomValidity('Must enter a title to search...')} onInput={(e) => e.target.setCustomValidity('')} />
+        <input ref={inputTitle} type="search" name="media" id="media" placeholder='Title of a movie, tv show or game...' title='Type in a movie title and click on "search" button' required onInvalid={(e) => e.target.setCustomValidity('Must enter at least three characters to search...')} onInput={(e) => e.target.setCustomValidity('')} minLength={3} />
         <input type="submit" value="search" />
       </form>
     </header>

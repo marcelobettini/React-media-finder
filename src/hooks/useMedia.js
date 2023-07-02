@@ -8,30 +8,30 @@ export function useMedia(query) {
   const [isLoading, setIsLoading] = useState(true);
   const isQuery = query;
 
-  const getMedia = () => {
-    fetch(`${BASE_URL}s=${query}`)
-      .then(res => {
-        if (!res.ok) throw new Error();
-        return res.json();
-      })
-      .then(data => {
-        const shapedData = data?.Search.map(m => ({
-          id: m.imdbID,
-          title: m.Title,
-          year: m.Year,
-          poster: m.Poster,
-          type: m.Type,
-        }));
-        setData(shapedData);
-        setError(false);
-      })
-      .catch(err => {
-        console.error(err);
-        setError(true);
-      })
-      .finally(setIsLoading(false));
-  };
   useEffect(() => {
+    const getMedia = () => {
+      fetch(`${BASE_URL}s=${query}`)
+        .then(res => {
+          if (!res.ok) throw new Error();
+          return res.json();
+        })
+        .then(data => {
+          const shapedData = data?.Search.map(m => ({
+            id: m.imdbID,
+            title: m.Title,
+            year: m.Year,
+            poster: m.Poster,
+            type: m.Type,
+          }));
+          setData(shapedData);
+          setError(false);
+        })
+        .catch(err => {
+          console.error(err);
+          setError(true);
+        })
+        .finally(setIsLoading(false));
+    };
     if (query) {
       getMedia(query);
     }
