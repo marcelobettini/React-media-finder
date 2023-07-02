@@ -3,7 +3,7 @@ function Media({ media }) {
   return (
     <article className="media-card">
       <h3>{media.title}</h3>
-      <p>{media.year}</p>
+      <p>{media.year} / {media.type.toLocaleUpperCase()}</p>
       <img src={media.poster} alt={media.title} />
     </article>
   );

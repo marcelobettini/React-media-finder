@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import Media from './Media';
-function MediaList({ data }) {
+function MediaList({ data, error, isLoading }) {
+  console.count("Media List");
   /*
   Toda esta lógica de "data fetching" la vamos a extraer a un custom hook, para no tener esa lógica dentro del componente. Con esto logramos mayor abstracción, reutilización y legibilidad.
 Y una vez que lo hagamos, podríamos incluso utilizarlo en App y el estado nos quedará en el componente padre...
@@ -16,9 +17,10 @@ Y aquí lo recibimos por props (como se ve ahora)
   })
   );
 */
-  if (!data.length) return <h3>No media here...</h3>;
+  if (isLoading) return <h3>Loading...</h3>;
+  if (error) return <h3>No hay resultados...</h3>;
 
-  return data.length && (
+  return data && (
     <section className="media-container">
       {data.map(m => <Media key={m.id} media={m} />)}
     </section>
@@ -34,7 +36,9 @@ MediaList.propTypes = {
         type: PropTypes.string,
         poster: PropTypes.string
       }
-    ))
+    )),
+  error: PropTypes.bool,
+  isLoading: PropTypes.bool
 };
 
 export default MediaList;

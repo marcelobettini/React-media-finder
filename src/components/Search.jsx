@@ -1,10 +1,12 @@
 import { useRef } from "react";
+import PropTypes from "prop-types";
 
-function Search() {
+function Search({ onChangeQuery }) {
+  console.log(console.count("Search"));
   const inputTitle = useRef();
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(inputTitle.current.value);
+    onChangeQuery(inputTitle.current.value);
 
 
   };
@@ -12,12 +14,16 @@ function Search() {
     <header className="header">
       <h1>Awesome Media Finder</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="movie">Media: </label>
-        <input ref={inputTitle} type="search" name="movie" id="movie" placeholder='The title of a movie, serie, game...' title='Type in a movie title and click on "search" button' />
+        <label htmlFor="media">Media: </label>
+        <input ref={inputTitle} type="search" name="media" id="media" placeholder='Title of a movie, tv show or game...' title='Type in a movie title and click on "search" button' required onInvalid={(e) => e.target.setCustomValidity('Must enter a title to search...')} onInput={(e) => e.target.setCustomValidity('')} />
         <input type="submit" value="search" />
       </form>
     </header>
   );
 }
+
+Search.propTypes = {
+  onChangeQuery: PropTypes.func
+};
 
 export default Search;
