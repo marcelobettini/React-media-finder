@@ -1,16 +1,16 @@
-// import responseWithData from "../data/responseWithData.json";
 import { useEffect, useState } from "react";
-const BASE_URL = "https://www.omdbapi.com/?apikey=4287ad07&";
-export function useMedia(query) {
+const BASE_URL = "https://www.omdbapi.com/?apikey=";
+const API_KEY = "4287ad07&";
+export function useMedia(query, sort) {
   console.count("custom hook");
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const isQuery = query;
+  const isQuery = !!query;
 
   useEffect(() => {
     const getMedia = () => {
-      fetch(`${BASE_URL}s=${query}`)
+      fetch(`${BASE_URL}${API_KEY}s=${query}`)
         .then(res => {
           if (!res.ok) throw new Error();
           return res.json();
@@ -23,7 +23,14 @@ export function useMedia(query) {
             poster: m.Poster,
             type: m.Type,
           }));
-          setData(shapedData);
+          if (!sort) {
+            setData(shapedData);
+          } else {
+            const sortedData = [...shapedData].sort((a, b) =>
+              a.title.localeCompare(b.title)
+            );
+            setData(sortedData);
+          }
           setError(false);
         })
         .catch(err => {
@@ -35,7 +42,7 @@ export function useMedia(query) {
     if (query) {
       getMedia(query);
     }
-  }, [query]);
+  }, [query, sort]);
 
   return { data, error, isLoading, isQuery };
 }

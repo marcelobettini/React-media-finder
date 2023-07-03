@@ -9,14 +9,13 @@ import MediaList from "./components/MediaList";
 
 function App() {
   const [query, setQuery] = useState("");
-  const { data, error, isLoading, isQuery } = useMedia(query);
-  const handleQuery = (text) => {
-    setQuery(text);
-
-  };
+  const [sort, setSort] = useState(false);
+  const { data, error, isLoading, isQuery } = useMedia(query, sort);
+  const handleQuery = (text) => setQuery(text);
+  const handleSort = () => setSort(!sort);
   return (
     <>
-      <Search onChangeQuery={(text) => handleQuery(text)} />
+      <Search onChangeQuery={(text) => handleQuery(text)} sort={sort} onSort={handleSort} />
 
       <MediaList data={data} error={error} isLoading={isLoading} isQuery={isQuery} />
 
